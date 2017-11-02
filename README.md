@@ -25,11 +25,3 @@ Then you can test the project with the command:
 ```
 >./project2 inputFile outputFile
 ```
-
-## Notes
-
-1. If your cmake version doesn't match, change the below line in CMakeLists.txt with your version.
-```
-cmake_minimum_required(VERSION 3.8)
-```
-
