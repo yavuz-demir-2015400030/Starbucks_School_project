@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Customer.h"
 #include <queue>
+#include <iomanip>
 #include <vector>
 
 
@@ -18,24 +19,26 @@ bool compareCustomerIDs(Customer const& c1, Customer const& c2){
 
 
 
-int main() {
+int main(int argc, char* argv[]) {
 
 
-    ifstream input;
-
-    input.open("C:\\Users\\Yavuz\\CLionProjects\\project2-yavuz-demir-2015400030-master\\input");
-
-    if(input.fail()){
-        cerr<< "Error occured --> No such file"<<endl;
-        exit(1);
+    if (argc != 3) {
+        cout << "Run the code with the following command: ./project1 [input_file] [output_file]" << endl;
+        return 1;
     }
+
+    cout << "input file: " << argv[1] << endl;
+    cout << "output file: " << argv[2] << endl;
+
+    ifstream input(argv[1]);
+
 
 
     int n;
     int m;
 
     input >> n >> m;
-//    cout<< n << "  " << m <<endl;
+
 
 
     Cashier* cash[n];
@@ -195,8 +198,6 @@ int main() {
     }
 
     sort(cust, cust+m, compareCustomers);
-
-
 
     int bQmax = 0;
     int b2[n/3];
@@ -430,10 +431,6 @@ int main() {
 
     sort(cust, cust+m, compareCustomerIDs);
 
-    cout<< "" <<endl;
-
-
-
 
     double totalTime = 0;
     double totalTime2 = 0;
@@ -446,42 +443,41 @@ int main() {
         }
     }
 
-    cout<<""<<endl;
 
-    cout<<totalTime<<endl;
-    cout<< maxLength << endl;
-    cout<< bQmax << endl;
+    ofstream output;
+    output.open(argv[2]);
+
+    output<<std::fixed<<std::setprecision(2)<<totalTime<<endl;
+    output<< maxLength << endl;
+    output<< bQmax << endl;
 
 
     for(int i=0; i<n; i++){
-        cout<< 1.0*cash[i]->busyTime/totalTime<<endl;
+        output<<std::fixed<<std::setprecision(2)<< 1.0*cash[i]->busyTime/totalTime<<endl;
     }
     for(int i=0; i<n/3; i++){
-        cout<< 1.0*bar[i]->busyTime/totalTime<<endl;
+        output<<std::fixed<<std::setprecision(2)<< 1.0*bar[i]->busyTime/totalTime<<endl;
     }
     for(int i=0; i<m; i++){
-        cout<< cust[i].turnAroundTime <<endl;
+        output<<std::fixed<<std::setprecision(2)<< cust[i].turnAroundTime <<endl;
     }
 
-    cout<<""<<endl;
+    output<<""<<endl;
 
-    cout<<totalTime2<<endl;
-    cout<< maxLength << endl;
+    output<<std::fixed<<std::setprecision(2)<<totalTime2<<endl;
+    output<< maxLength << endl;
     for(int i=0; i<n/3; i++){
-        cout<<max2[i]<<endl;
+        output<<max2[i]<<endl;
     }
 
     for(int i=0; i<n; i++){
-        cout<< 1.0*cash[i]->busyTime/totalTime2<<endl;
+        cout<<std::fixed<<std::setprecision(2)<< 1.0*cash[i]->busyTime/totalTime2<<endl;
     }
     for(int i=0; i<n/3; i++){
-        cout<< 1.0*bar2[i]->busyTime/totalTime2<<endl;
+        cout<<std::fixed<<std::setprecision(2)<< 1.0*bar2[i]->busyTime/totalTime2<<endl;
     }
     for(int i=0; i<m; i++){
-        cout<< cust[i].tAT2 <<endl;
+        cout<<std::fixed<<std::setprecision(2)<< cust[i].tAT2 <<endl;
     }
-
-
-
 
 }
