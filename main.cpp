@@ -104,12 +104,14 @@ int main(int argc, char* argv[]) {
                 cashQ.push(i);
                 cLength++;
 
+
                 inQueue = false;
 
                 do {
 
                     int index = cashQ.front();
                     cashQ.pop();
+
                     cLength--;
 
 
@@ -149,9 +151,10 @@ int main(int argc, char* argv[]) {
         if(inQueue){
             cashQ.push(i);
             cLength++;
-            if(maxLength < cLength){
-                maxLength = cLength;
-            }
+            maxLength++;
+//            if(maxLength < cLength){
+//                maxLength = cLength;
+//            }
         }
 
     }
@@ -471,13 +474,15 @@ int main(int argc, char* argv[]) {
     }
 
     for(int i=0; i<n; i++){
-        cout<<std::fixed<<std::setprecision(2)<< 1.0*cash[i]->busyTime/totalTime2<<endl;
+        output<<std::fixed<<std::setprecision(2)<< 1.0*cash[i]->busyTime/totalTime2<<endl;
     }
     for(int i=0; i<n/3; i++){
-        cout<<std::fixed<<std::setprecision(2)<< 1.0*bar2[i]->busyTime/totalTime2<<endl;
+        output<<std::fixed<<std::setprecision(2)<< 1.0*bar2[i]->busyTime/totalTime2<<endl;
     }
     for(int i=0; i<m; i++){
-        cout<<std::fixed<<std::setprecision(2)<< cust[i].tAT2 <<endl;
+        output<<std::fixed<<std::setprecision(2)<< cust[i].tAT2 <<endl;
     }
 
+    output.close();
+    return 0;
 }
